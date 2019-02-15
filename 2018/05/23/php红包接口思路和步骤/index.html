@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="习红卫, 博客，PHP，前端">
+  <meta name="keywords" content="红包，并发,">
 
 
 
@@ -79,14 +79,18 @@
 
 
 
-<meta name="keywords" content="习红卫, 博客, PHP">
-<meta property="og:type" content="website">
-<meta property="og:title" content="习红卫的博客">
-<meta property="og:url" content="https://www.xihongwei.com/archives/2019/index.html">
+<meta name="description" content="模拟微信发红包，支持个人，群组普通红包、拼手气红包 快速开始：大概思路： 发红包的时候存好队列 抢红包就读取队列，队列为空即抢完，将抢了的人记起来，再抢就跳领取记录页面 红包设置有过期时间，过期未领取返回发红包人账户  数据库设计：红包发放表，记录所有发的红包 12345678910111213141516171819CREATE TABLE `red_packet` (  `id` int(10">
+<meta name="keywords" content="红包，并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php红包接口思路和步骤">
+<meta property="og:url" content="https://www.xihongwei.com/2018/05/23/php红包接口思路和步骤/index.html">
 <meta property="og:site_name" content="习红卫的博客">
+<meta property="og:description" content="模拟微信发红包，支持个人，群组普通红包、拼手气红包 快速开始：大概思路： 发红包的时候存好队列 抢红包就读取队列，队列为空即抢完，将抢了的人记起来，再抢就跳领取记录页面 红包设置有过期时间，过期未领取返回发红包人账户  数据库设计：红包发放表，记录所有发的红包 12345678910111213141516171819CREATE TABLE `red_packet` (  `id` int(10">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-15T06:46:38.957Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="习红卫的博客">
+<meta name="twitter:title" content="php红包接口思路和步骤">
+<meta name="twitter:description" content="模拟微信发红包，支持个人，群组普通红包、拼手气红包 快速开始：大概思路： 发红包的时候存好队列 抢红包就读取队列，队列为空即抢完，将抢了的人记起来，再抢就跳领取记录页面 红包设置有过期时间，过期未领取返回发红包人账户  数据库设计：红包发放表，记录所有发的红包 12345678910111213141516171819CREATE TABLE `red_packet` (  `id` int(10">
 
 
 
@@ -116,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://www.xihongwei.com/archives/2019/">
+  <link rel="canonical" href="https://www.xihongwei.com/2018/05/23/php红包接口思路和步骤/">
 
 
 
 
 
-  <title>归档 | 习红卫的博客</title>
+  <title>php红包接口思路和步骤 | 习红卫的博客</title>
   
 
 
@@ -141,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -297,72 +301,178 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 9 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.xihongwei.com/2018/05/23/php红包接口思路和步骤/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="习红卫">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/god.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="习红卫的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/02/15/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">php红包接口思路和步骤</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-15T16:31:16+08:00" content="2019-02-15">
-          02-15
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-23T17:42:55+08:00">
+                2018-05-23
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/23/php红包接口思路和步骤/" class="leancloud_visitors" data-flag-title="php红包接口思路和步骤">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <p>模拟微信发红包，支持个人，群组普通红包、拼手气红包</p>
+<h2 id="快速开始："><a href="#快速开始：" class="headerlink" title="快速开始："></a>快速开始：</h2><h3 id="大概思路："><a href="#大概思路：" class="headerlink" title="大概思路："></a>大概思路：</h3><ul>
+<li>发红包的时候存好队列</li>
+<li>抢红包就读取队列，队列为空即抢完，将抢了的人记起来，再抢就跳领取记录页面</li>
+<li>红包设置有过期时间，过期未领取返回发红包人账户</li>
+</ul>
+<h3 id="数据库设计："><a href="#数据库设计：" class="headerlink" title="数据库设计："></a>数据库设计：</h3><p>红包发放表，记录所有发的红包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `red_packet` (</span><br><span class="line">  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `user_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT &apos;用户id&apos;,</span><br><span class="line">  `user_name` varchar(100) NOT NULL DEFAULT &apos;&apos;,</span><br><span class="line">  `for_id` varchar(30) NOT NULL COMMENT &apos;发送对象，可以是用户ID，可以是群组ID&apos;,</span><br><span class="line">  `rp_type` tinyint(2) unsigned NOT NULL DEFAULT 1 COMMENT &apos;红包类型，1、普通，2、二维码红包&apos;,</span><br><span class="line">  `type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT &apos;类型：1、个人，2、群普通，3、群拼手气&apos;,</span><br><span class="line">  `intro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT &apos;&apos; COMMENT &apos;备注&apos;,</span><br><span class="line">  `number` int(10) NOT NULL  COMMENT &apos;数量&apos;,</span><br><span class="line">  `total_money` decimal(10,2) unsigned NOT NULL DEFAULT 0 COMMENT &apos;总金额&apos;,</span><br><span class="line">  `single_money` decimal(10,2) unsigned NOT NULL DEFAULT 0 COMMENT &apos;单个金额&apos;,</span><br><span class="line">  `return_money` decimal(10,2) unsigned NOT NULL DEFAULT 0 COMMENT &apos;退还金额&apos;,</span><br><span class="line">  `expend_time` tinyint unsigned NOT NULL DEFAULT 0 COMMENT &apos;领取完消耗时间&apos;,</span><br><span class="line">  `status` tinyint(2) NOT NULL DEFAULT 1  COMMENT &apos;1、正常，2、已抢完，3、已过期&apos;,</span><br><span class="line">  `created_at` int(11) DEFAULT NULL,</span><br><span class="line">  </span><br><span class="line">  PRIMARY KEY (`id`),</span><br><span class="line">  KEY `user_id` (`user_id`)</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT=&apos;红包发放表&apos;</span><br></pre></td></tr></table></figure>
+<p>红包领取日志表，查询红包详情和所有红包记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `red_packet_log` (</span><br><span class="line">  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `rp_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT &apos;红包id&apos;,</span><br><span class="line">  `user_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT &apos;领取人id&apos;,</span><br><span class="line">  `name` varchar(100) NOT NULL DEFAULT &apos;&apos;,</span><br><span class="line">  `money` decimal(10,2) unsigned NOT NULL DEFAULT 0 COMMENT=&apos;领了多少钱&apos;,</span><br><span class="line">  `is_good` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT &apos;是否手气最佳：0否，1是&apos;,</span><br><span class="line">  `created_at` int(11) DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (`id`),</span><br><span class="line">  KEY `rp_id` (`rp_id`),</span><br><span class="line">  KEY `user_id` (`user_id`),</span><br><span class="line">  KEY `created_at` (`created_at`)</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT=&apos;红包领取日志表&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="代码实践："><a href="#代码实践：" class="headerlink" title="代码实践："></a>代码实践：</h3><h4 id="发红包"><a href="#发红包" class="headerlink" title="发红包"></a>发红包</h4><p>在发红包的时候将金额分配好，领取的时候直接拿数据</p>
+<p>在Redis队列里面存储 红包ID，发红包人，数量，时间</p>
+<p>个人和群普通都好处理，拼手气红包就要用算法进行分配</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// $number 发多少人， </span><br><span class="line">// $total_money 总金额，</span><br><span class="line">// $min 最少拿到多少（这里默认设置0.01，在输入的时候做下限制）</span><br><span class="line">// $i = 1 最后一个拿剩余金额</span><br><span class="line"></span><br><span class="line">for ($i = 1; $i &lt; $number; $i++) &#123;</span><br><span class="line">    $safe_total = ($total_money - ($number - $i) * $min) / ($number - $i);//随机安全上限</span><br><span class="line">    $safe_total = $safe_total &lt; $min ? $min : $safe_total;</span><br><span class="line">    $money = mt_rand($min * 100, $safe_total * 100) / 100;</span><br><span class="line">    $total_money = bcsub($total_money, $money, 2); //限制到2位小数</span><br><span class="line">    </span><br><span class="line">    //存储到数组</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// $total_money为剩余金额，存储到数组</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">//算出手气最佳，is_good 更新为1</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">// 剩余金额存储到队列</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">//将数组打乱</span><br><span class="line">shuffle($sorted);</span><br><span class="line"></span><br><span class="line">//集体存储到队列</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h4 id="抢红包"><a href="#抢红包" class="headerlink" title="抢红包"></a>抢红包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">//接收红包ID，并进行判断</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">//判断是否已经抢过，抢完，失效</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">//读取队列，红包记录存储，推送消息，资金处理</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">所有状态</span><br><span class="line">const STATUS_NO_SELF = 0;   //个人红包不能自己抢</span><br><span class="line">const STATUS_SUCCESS = 1;   //成功</span><br><span class="line">const STATUS_GRAB_OVER = 2; //抢完</span><br><span class="line">const STATUS_GRABED = 3;   //已领取过</span><br><span class="line">const STATUS_ERROR = 4;     //程序错误</span><br><span class="line">const STATUS_EXPIRED = 5;   //红包失效</span><br></pre></td></tr></table></figure>
+<h4 id="红包过期检测"><a href="#红包过期检测" class="headerlink" title="红包过期检测"></a>红包过期检测</h4><p>后台跑个任务检测，过期就将钱返还到发红包人账户，并且记录返还金额，并推送消息</p>
+<p>后记：支付宝红包可以做一个判断，加一个类型，其他步骤类似</p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/红包，并发/" rel="tag"># 红包，并发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/23/php调redis常用方法/" rel="next" title="php调redis常用方法">
+                <i class="fa fa-chevron-left"></i> php调redis常用方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/23/新浪实时股票数据接口/" rel="prev" title="新浪实时股票数据接口">
+                新浪实时股票数据接口 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -370,6 +480,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDg1MC8xNzM3NQ=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -390,8 +509,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -460,6 +588,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#快速开始："><span class="nav-number">1.</span> <span class="nav-text">快速开始：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#大概思路："><span class="nav-number">1.1.</span> <span class="nav-text">大概思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库设计："><span class="nav-number">1.2.</span> <span class="nav-text">数据库设计：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实践："><span class="nav-number">1.3.</span> <span class="nav-text">代码实践：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#发红包"><span class="nav-number">1.3.1.</span> <span class="nav-text">发红包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#抢红包"><span class="nav-number">1.3.2.</span> <span class="nav-text">抢红包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#红包过期检测"><span class="nav-number">1.3.3.</span> <span class="nav-text">红包过期检测</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -600,6 +744,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -628,6 +776,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 

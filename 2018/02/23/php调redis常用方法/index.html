@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="习红卫, 博客，PHP，前端">
+  <meta name="keywords" content="redis, php,">
 
 
 
@@ -79,14 +79,18 @@
 
 
 
-<meta name="keywords" content="习红卫, 博客, PHP">
-<meta property="og:type" content="website">
-<meta property="og:title" content="习红卫的博客">
-<meta property="og:url" content="https://www.xihongwei.com/archives/2019/index.html">
+<meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101/***">
+<meta name="keywords" content="redis, php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php调redis常用方法">
+<meta property="og:url" content="https://www.xihongwei.com/2018/02/23/php调redis常用方法/index.html">
 <meta property="og:site_name" content="习红卫的博客">
+<meta property="og:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101/***">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-15T06:46:38.957Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="习红卫的博客">
+<meta name="twitter:title" content="php调redis常用方法">
+<meta name="twitter:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101/***">
 
 
 
@@ -116,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://www.xihongwei.com/archives/2019/">
+  <link rel="canonical" href="https://www.xihongwei.com/2018/02/23/php调redis常用方法/">
 
 
 
 
 
-  <title>归档 | 习红卫的博客</title>
+  <title>php调redis常用方法 | 习红卫的博客</title>
   
 
 
@@ -141,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -297,72 +301,161 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 9 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.xihongwei.com/2018/02/23/php调redis常用方法/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="习红卫">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/god.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="习红卫的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/02/15/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">php调redis常用方法</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-15T16:31:16+08:00" content="2019-02-15">
-          02-15
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-23T17:39:23+08:00">
+                2018-02-23
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/23/php调redis常用方法/" class="leancloud_visitors" data-flag-title="php调redis常用方法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* String  </span><br><span class="line">* --------------</span><br><span class="line">* set key value 设置一个值</span><br><span class="line">* get key 获取一个值</span><br><span class="line">* del key 删除一个值</span><br><span class="line">*</span><br><span class="line">* List</span><br><span class="line">* --------------</span><br><span class="line">* lpush key value | rpush key value 插入一个值</span><br><span class="line">* lpop key | rpop 弹出一个值</span><br><span class="line">* lrange key offset end | lgetrange key offset end 取列表里指定范围的值</span><br><span class="line">* lindex key index 获取指定index的单个值</span><br><span class="line">*</span><br><span class="line">* lsize key 获取列表长度</span><br><span class="line">* lset key index value 设置指定index的值</span><br><span class="line">* ltrim key offset end 截取指定范围内的元素，其余的删除</span><br><span class="line">* lrem key value index 删除指定范围的值</span><br><span class="line">*</span><br><span class="line">* Set</span><br><span class="line">* --------------</span><br><span class="line">* sadd key value 添加元素</span><br><span class="line">* smembers key 查看所有元素</span><br><span class="line">* srem key value 删除某个元素</span><br><span class="line">* sismember key value 是否存在</span><br><span class="line">* scard key 查看数量</span><br><span class="line">* spop key 随机取出一个返回并删除</span><br><span class="line">* sinter key1 key2 返回集合的交集</span><br><span class="line">* sinterstore output key1 key2 返回的交集丢到output中</span><br><span class="line">* sunion key1 key2 返回集合的并集</span><br><span class="line">* sunionstore output key1 key2 返回的并集丢到output中</span><br><span class="line">* sdiff key1 key2 返回集合的差集</span><br><span class="line">* sdiffstore output key1 key2 返回的差集丢到output中</span><br><span class="line">*</span><br><span class="line">* Sorted Set</span><br><span class="line">* --------------</span><br><span class="line">* zadd key score value 添加元素</span><br><span class="line">* zrange key offset end [true|false] 取列表里指定范围的值，[是否键值反转]</span><br><span class="line">* zscore key value 返回score</span><br><span class="line">* zcard key 查看数量</span><br><span class="line">* zrem key value 删除某个元素</span><br><span class="line">* zcount key min max 返回集合中介于min和max之间的值的个数</span><br><span class="line">* zrangebyscore key min max 返回有序集合中score介于min和max之间的值</span><br><span class="line">* zrevrange key min max 返回集合中指定区间内所有的值</span><br><span class="line">* zincrby key number value 指定值的socre增加</span><br><span class="line">* zremrangebyscore key min max 移除有序集合中score介于min和max之间的值</span><br><span class="line">*</span><br><span class="line">* Hash</span><br><span class="line">* --------------</span><br><span class="line">* hset arr key value 设置值，重复设置会覆盖</span><br><span class="line">* hget arr key 获取值</span><br><span class="line">* hkeys arr 获取hash中所有key</span><br><span class="line">* hvals arr 获取hash中所有值，顺序是随机的</span><br><span class="line">* hgetall arr 获取key和value，随机顺序</span><br><span class="line">* hlen arr 获取key的数量</span><br><span class="line">* hdel arr key 删除key</span><br><span class="line">*</span><br><span class="line">*</span><br><span class="line">*</span><br><span class="line">*</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">//多个hash值设置</span><br><span class="line"></span><br><span class="line">//实例化redis</span><br><span class="line">$redis = new Redis();</span><br><span class="line">//连接</span><br><span class="line">$redis-&gt;connect(&apos;127.0.0.1&apos;, 6379);</span><br><span class="line">//字典</span><br><span class="line">//批量设置多个key的值</span><br><span class="line">$arr = [1=&gt;1, 2=&gt;2, 3=&gt;3, 4=&gt;4, 5=&gt;5];</span><br><span class="line">$redis-&gt;hmset(&apos;hash&apos;, $arr);</span><br><span class="line">print_r($redis-&gt;hgetall(&apos;hash&apos;));echo &apos;&lt;br&gt;&apos;;</span><br><span class="line"></span><br><span class="line">// 批量获得额多个key的值</span><br><span class="line">$arr = [1, 2, 3, 5];</span><br><span class="line">$hash = $redis-&gt;hmget(&apos;hash&apos;, $arr);</span><br><span class="line">print_r($hash);echo &apos;&lt;br&gt;&apos;;</span><br><span class="line"></span><br><span class="line">//检测hash中某个key知否存在</span><br><span class="line">echo $redis-&gt;hexists(&apos;hash&apos;, &apos;1&apos;);echo &apos;&lt;br&gt;&apos;;</span><br><span class="line">var_dump($redis-&gt;hexists(&apos;hash&apos;, &apos;cat&apos;));echo &apos;&lt;br&gt;&apos;;</span><br><span class="line"></span><br><span class="line">print_r($redis-&gt;hgetall(&apos;hash&apos;));echo &apos;&lt;br&gt;&apos;;</span><br><span class="line"></span><br><span class="line">//给hash表中key增加一个整数值</span><br><span class="line">$redis-&gt;hincrby(&apos;hash&apos;, &apos;1&apos;, 1);</span><br><span class="line">print_r($redis-&gt;hgetall(&apos;hash&apos;));echo &apos;&lt;br&gt;&apos;;</span><br><span class="line"></span><br><span class="line">//给hash中的某个key增加一个浮点值</span><br><span class="line">$redis-&gt;hincrbyfloat(&apos;hash&apos;, 2, 1.3);</span><br><span class="line">print_r($redis-&gt;hgetall(&apos;hash&apos;));echo &apos;&lt;br&gt;&apos;;</span><br><span class="line"></span><br><span class="line">//结果</span><br><span class="line">// Array ( [1] =&gt; 1 [2] =&gt; 2 [3] =&gt; 3 [4] =&gt; 4 [5] =&gt; 5 )</span><br><span class="line">// Array ( [1] =&gt; 1 [2] =&gt; 2 [3] =&gt; 3 [5] =&gt; 5 )</span><br><span class="line">// 1</span><br><span class="line">// bool(false)</span><br><span class="line">// Array ( [1] =&gt; 1 [2] =&gt; 2 [3] =&gt; 3 [4] =&gt; 4 [5] =&gt; 5 )</span><br><span class="line">// Array ( [1] =&gt; 2 [2] =&gt; 2 [3] =&gt; 3 [4] =&gt; 4 [5] =&gt; 5 )</span><br><span class="line">// Array ( [1] =&gt; 2 [2] =&gt; 3.3 [3] =&gt; 3 [4] =&gt; 4 [5] =&gt; 5 )</span><br></pre></td></tr></table></figure>
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/redis-php/" rel="tag"># redis, php</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/23/无限级分类系列方法/" rel="next" title="无限级分类系列方法">
+                <i class="fa fa-chevron-left"></i> 无限级分类系列方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/23/php红包接口思路和步骤/" rel="prev" title="php红包接口思路和步骤">
+                php红包接口思路和步骤 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -370,6 +463,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDg1MC8xNzM3NQ=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -600,6 +702,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -628,6 +734,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 

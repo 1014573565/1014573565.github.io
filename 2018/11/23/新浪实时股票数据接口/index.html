@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="黄金，股票,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="股票数据的获取目前有如下两种方法可以获取：  http/javascript接口取数据 web-service接口  1.http/javascript接口取数据1.1Sina股票数据接口以大秦铁路（股票代码：601006）为例，如果要获取它的最新行情，只需访问新浪的股票数据接口：http://hq.sinajs.cn/list=sh601006这个url会返回一串文本，例如：var hq_str">
+<meta name="keywords" content="黄金，股票">
+<meta property="og:type" content="article">
+<meta property="og:title" content="新浪实时股票数据接口">
+<meta property="og:url" content="https://www.xihongwei.com/2018/11/23/新浪实时股票数据接口/index.html">
+<meta property="og:site_name" content="习红卫的博客">
+<meta property="og:description" content="股票数据的获取目前有如下两种方法可以获取：  http/javascript接口取数据 web-service接口  1.http/javascript接口取数据1.1Sina股票数据接口以大秦铁路（股票代码：601006）为例，如果要获取它的最新行情，只需访问新浪的股票数据接口：http://hq.sinajs.cn/list=sh601006这个url会返回一串文本，例如：var hq_str">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-15T06:46:38.958Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="新浪实时股票数据接口">
+<meta name="twitter:description" content="股票数据的获取目前有如下两种方法可以获取：  http/javascript接口取数据 web-service接口  1.http/javascript接口取数据1.1Sina股票数据接口以大秦铁路（股票代码：601006）为例，如果要获取它的最新行情，只需访问新浪的股票数据接口：http://hq.sinajs.cn/list=sh601006这个url会返回一串文本，例如：var hq_str">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '习红卫'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.xihongwei.com/2018/11/23/新浪实时股票数据接口/">
+
+
+
+
+
+  <title>新浪实时股票数据接口 | 习红卫的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">习红卫的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">刻意练习，每日精进</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home  //首页"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user  //关于"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags  //标签"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th   //分类"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive //归档"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar   //日程表"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap   //站点地图"></i> <br>
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.xihongwei.com/2018/11/23/新浪实时股票数据接口/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="习红卫">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/god.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="习红卫的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">新浪实时股票数据接口</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-23T18:23:05+08:00">
+                2018-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/23/新浪实时股票数据接口/" class="leancloud_visitors" data-flag-title="新浪实时股票数据接口">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>股票数据的获取目前有如下两种方法可以获取：</p>
+<ol>
+<li>http/javascript接口取数据</li>
+<li>web-service接口</li>
+</ol>
+<p>1.http/javascript接口取数据<br>1.1Sina股票数据接口<br>以大秦铁路（股票代码：601006）为例，如果要获取它的最新行情，只需访问新浪的股票数据接口：<br><a href="http://hq.sinajs.cn/list=sh601006" target="_blank" rel="noopener">http://hq.sinajs.cn/list=sh601006</a><br>这个url会返回一串文本，例如：<br>var hq_str_sh601006=”大秦铁路, 27.55, 27.25, 26.91, 27.55, 26.20,26.91, 26.92,<br>22114263, 589824680, 4695, 26.91, 57590, 26.90, 14700, 26.89,14300,<br>26.88, 15100, 26.87, 3100, 26.92, 8900, 26.93, 14230, 26.94, 25150,26.95, 15220, 26.96, 2008-01-11, 15:05:32”;<br>这个字符串由许多数据拼接在一起，不同含义的数据用逗号隔开了，按照程序员的思路，顺序号从0开始。<br>0：”大秦铁路”，股票名字；<br>1：”27.55″，今日开盘价；<br>2：”27.25″，昨日收盘价；<br>3：”26.91″，当前价格；<br>4：”27.55″，今日最高价；<br>5：”26.20″，今日最低价；<br>6：”26.91″，竞买价，即“买一”报价；<br>7：”26.92″，竞卖价，即“卖一”报价；<br>8：”22114263″，成交的股票数，由于股票交易以一百股为基本单位，所以在使用时，通常把该值除以一百；<br>9：”589824680″，成交金额，单位为“元”，为了一目了然，通常以“万元”为成交金额的单位，所以通常把该值除以一万；<br>10：”4695″，“买一”申请4695股，即47手；<br>11：”26.91″，“买一”报价；<br>12：”57590″，“买二”<br>13：”26.90″，“买二”<br>14：”14700″，“买三”<br>15：”26.89″，“买三”<br>16：”14300″，“买四”<br>17：”26.88″，“买四”<br>18：”15100″，“买五”<br>19：”26.87″，“买五”<br>20：”3100″，“卖一”申报3100股，即31手；<br>21：”26.92″，“卖一”报价<br>(22, 23), (24, 25), (26,27), (28, 29)分别为“卖二”至“卖四的情况”<br>30：”2008-01-11″，日期；<br>31：”15:05:32″，时间；<br>一个简单的JavaScript应用例子:</p>
+<p>这段代码输出大秦铁路（股票代码：601006）的当前股价<br>current price:14.20<br>如果你要同时查询多个股票，那么在URL最后加上一个逗号，再加上股票代码就可以了；比如你要一次查询大秦铁路（601006）和大同煤业（601001）的行情，就这样使用URL：<br><a href="http://hq.sinajs.cn/list=sh601003,sh601001" target="_blank" rel="noopener">http://hq.sinajs.cn/list=sh601003,sh601001</a><br>查询大盘指数，比如查询上证综合指数（000001）：<br><a href="http://hq.sinajs.cn/list=s_sh000001" target="_blank" rel="noopener">http://hq.sinajs.cn/list=s_sh000001</a><br>服务器返回的数据为：<br>varhq_str_s_sh000001=”上证指数,3094.668,-128.073,-3.97,436653,5458126”;<br>数据含义分别为：指数名称，当前点数，当前价格，涨跌率，成交量（手），成交额（万元）；<br>查询深圳成指数：<br><a href="http://hq.sinajs.cn/list=s_sz399001" target="_blank" rel="noopener">http://hq.sinajs.cn/list=s_sz399001</a><br>对于股票的K线图，日线图等的获取可以通过请求<a href="http://image.sinajs.cn/…./…/*.gif此URL获取，其中*代表股票代码，详见如下：" target="_blank" rel="noopener">http://image.sinajs.cn/…./…/*.gif此URL获取，其中*代表股票代码，详见如下：</a><br>查看日K线图：<br><a href="http://image.sinajs.cn/newchart/daily/n/sh601006.gif" target="_blank" rel="noopener">http://image.sinajs.cn/newchart/daily/n/sh601006.gif</a></p>
+<p>分时线的查询：<br><a href="http://image.sinajs.cn/newchart/min/n/sh000001.gif" target="_blank" rel="noopener">http://image.sinajs.cn/newchart/min/n/sh000001.gif</a></p>
+<p>日K线查询：<br><a href="http://image.sinajs.cn/newchart/daily/n/sh000001.gif" target="_blank" rel="noopener">http://image.sinajs.cn/newchart/daily/n/sh000001.gif</a></p>
+<p>周K线查询：<br><a href="http://image.sinajs.cn/newchart/weekly/n/sh000001.gif" target="_blank" rel="noopener">http://image.sinajs.cn/newchart/weekly/n/sh000001.gif</a></p>
+<p>月K线查询：<br><a href="http://image.sinajs.cn/newchart/monthly/n/sh000001.gif" target="_blank" rel="noopener">http://image.sinajs.cn/newchart/monthly/n/sh000001.gif</a></p>
+<p>1.2Baidu&amp;Google的财经数据<br>在baidu,google中搜索某只股票代码时，将会在头条显示此股票的相关信息，例如在google搜索601006时，<br>第一条搜索结果如下图：<br>通过点击左边的图片我们发现会将此图片链接到sina财经频道上，也就是说google股票数据的获取也是从sina获取。后经抓包分析，发现google也是采用1.1中介绍的接口。<br>Baidu的股票数据来自baidu的财经频道<br><a href="http://stock.baidu.com/" target="_blank" rel="noopener">http://stock.baidu.com/</a><br>1.3 其他方式<br>除了sina，baidu等网站提供股票信息外，其他网站也有类似的接口。我们分析了一款论坛上采用的股票插件，<br>其中有关于实时股票数据获取的介绍，详见如下代码，其中可以看到有些数据来自sina。<br>以下是ASP示例:<br>=5 then<br>stockdata=gethttp(“<a href="http://hq.sinajs.cn/list=sh&quot;&amp;code&amp;&quot;&quot;" target="_blank" rel="noopener">http://hq.sinajs.cn/list=sh&quot;&amp;code&amp;&quot;&quot;</a>)<br>if not len(stockdata)=0 thenstockdata=split(stockdata,chr(34))(1)<br>end if<br>if len(stockdata)=0 then<br>stockdata=”0,0,0,0,0,0,0,0,0,0,0,0”<br>else<br>stockdatasplit=split(stockdata,”,”)stockdata=””&amp;exstock.checkstr(stockdatasplit(0))&amp;”,”&amp;stockdatasplit(1)&amp;”,”&amp;stockdatasplit(2)&amp;”,”&amp;stockdatasplit(3)&amp;”,”&amp;stockdatasplit(4)&amp;”,”&amp;stockdatasplit(5)&amp;”,”&amp;formatdatetime(“”&amp;stockdatasplit(30)&amp;””&amp;stockdatasplit(31)&amp;””,0)&amp;””<br>end if<br>‘0=股票名称,1=开盘价格,2=昨收盘价格,3=当前价格,4=最高价,5=最低价,6=更新时间<br>getstockdata=stockdata<br>end function<br>function getstockimg(code)<br>dim rndnum,addnum,checkcode,imgsource<br>if len(code)=5 then<br>getstockimg=”<a href="http://image.sinajs.cn/newchart/daily/n/sh&quot;&amp;code&amp;&quot;.gif&quot;" target="_blank" rel="noopener">http://image.sinajs.cn/newchart/daily/n/sh&quot;&amp;code&amp;&quot;.gif&quot;</a><br>end if<br>imgsource=”<a href="http://finance.sina.com.cn&quot;" target="_blank" rel="noopener">http://finance.sina.com.cn&quot;</a><br>case 3<br>getstockimg=”<a href="http://hq.gazxfe.com/stockchart/realline.chart?&quot;&amp;code&amp;&quot;&amp;1003&amp;SZ500" target="_blank" rel="noopener">http://hq.gazxfe.com/stockchart/realline.chart?&quot;&amp;code&amp;&quot;&amp;1003&amp;SZ500</a> 330”<br>imgsource=”<a href="http://hq.gazxfe.com&quot;" target="_blank" rel="noopener">http://hq.gazxfe.com&quot;</a><br>case 4<br>getstockimg=”<a href="http://chartse.stockstar.com/chartserver?code=&quot;&amp;code&amp;&quot;&quot;" target="_blank" rel="noopener">http://chartse.stockstar.com/chartserver?code=&quot;&amp;code&amp;&quot;&quot;</a><br>imgsource=”<a href="http://www.stockstar.com/&quot;" target="_blank" rel="noopener">http://www.stockstar.com/&quot;</a><br>end select<br>getstockimg=split(“”&amp;getstockimg&amp;”||”&amp;imgsource&amp;””,”||”)<br>end function<br>function getastockimg()<br>dim rndnum,addnum,checkcode<br>dim getastockimgb,imgsource<br>addnum=6<br>randomize:rndnum=cint(rnd*addnum)<br>select case rndnum<br>case 0<br>getastockimg=”<a href="http://202.109.106.1/gifchartse/gif/000001.gif&quot;" target="_blank" rel="noopener">http://202.109.106.1/gifchartse/gif/000001.gif&quot;</a><br>getastockimgb=”<a href="http://202.109.106.1/gifchartse/gif/399001.gif&quot;" target="_blank" rel="noopener">http://202.109.106.1/gifchartse/gif/399001.gif&quot;</a><br>imgsource=”<a href="http://www.stockstar.com/&quot;" target="_blank" rel="noopener">http://www.stockstar.com/&quot;</a><br>case 1<br>getastockimg=”<a href="http://money.163.com/special/100.gif?C39&quot;" target="_blank" rel="noopener">http://money.163.com/special/100.gif?C39&quot;</a><br>getastockimgb=”<a href="http://money.163.com/special/101.gif?HrS&quot;" target="_blank" rel="noopener">http://money.163.com/special/101.gif?HrS&quot;</a><br>imgsource=”<a href="http://www.163.com&quot;" target="_blank" rel="noopener">http://www.163.com&quot;</a><br>case 2<br>getastockimg=”<a href="http://www.10jqka.com.cn/curve/realtime/index2.php?code=1a0001&amp;w=180&amp;h=140&quot;" target="_blank" rel="noopener">http://www.10jqka.com.cn/curve/realtime/index2.php?code=1a0001&amp;w=180&amp;h=140&quot;</a><br>getastockimgb=”<a href="http://www.10jqka.com.cn/curve/realtime/index2.php?code=399001&amp;w=180&amp;h=140&quot;" target="_blank" rel="noopener">http://www.10jqka.com.cn/curve/realtime/index2.php?code=399001&amp;w=180&amp;h=140&quot;</a><br>imgsource=”<a href="http://www.10jqka.com.cn&quot;" target="_blank" rel="noopener">http://www.10jqka.com.cn&quot;</a><br>case 3<br>getastockimg=”<a href="http://chart.cnlist.com/stockchart/realline.chart?1a0001&amp;1002&amp;SZ180" target="_blank" rel="noopener">http://chart.cnlist.com/stockchart/realline.chart?1a0001&amp;1002&amp;SZ180</a> 140”<br>getastockimgb=”<a href="http://chart.cnlist.com/stockchart/realline.chart?399001&amp;1002&amp;SZ180" target="_blank" rel="noopener">http://chart.cnlist.com/stockchart/realline.chart?399001&amp;1002&amp;SZ180</a> 140”<br>imgsource=”<a href="http://chart.cnlist.com/&quot;" target="_blank" rel="noopener">http://chart.cnlist.com/&quot;</a><br>case 4<br>getastockimg=”<a href="http://image.sinajs.cn/newchart/small/ish000001.gif?1189176558328&quot;" target="_blank" rel="noopener">http://image.sinajs.cn/newchart/small/ish000001.gif?1189176558328&quot;</a><br>getastockimgb=”<a href="http://image.sinajs.cn/newchart/small/isz399001.gif?1189176558328&quot;" target="_blank" rel="noopener">http://image.sinajs.cn/newchart/small/isz399001.gif?1189176558328&quot;</a><br>imgsource=”<a href="http://www.sinajs.cn&quot;" target="_blank" rel="noopener">http://www.sinajs.cn&quot;</a><br>case 5<br>getastockimg=”<a href="http://218.1.72.66/cgi/pic/sh/realtime/JA000001164143.png&quot;" target="_blank" rel="noopener">http://218.1.72.66/cgi/pic/sh/realtime/JA000001164143.png&quot;</a><br>getastockimgb=”<a href="http://218.1.72.66/cgi/pic/sz/realtime/JA399001164143.png&quot;" target="_blank" rel="noopener">http://218.1.72.66/cgi/pic/sz/realtime/JA399001164143.png&quot;</a><br>imgsource=”<a href="http://www.cnstock.com/&quot;" target="_blank" rel="noopener">http://www.cnstock.com/&quot;</a><br>case 6<br>getastockimg=”<a href="http://222.73.29.85/img/000001.png&quot;" target="_blank" rel="noopener">http://222.73.29.85/img/000001.png&quot;</a><br>getastockimgb=”<a href="http://222.73.29.85/img/399001.png&quot;" target="_blank" rel="noopener">http://222.73.29.85/img/399001.png&quot;</a><br>imgsource=”<a href="http://www.eastmoney.com/&quot;" target="_blank" rel="noopener">http://www.eastmoney.com/&quot;</a><br>end select<br>getastockimg=split(“”&amp;getastockimg&amp;”||”&amp;getastockimgb&amp;”||”&amp;imgsource&amp;””,”||”)<br>end function<br>%&gt;</p>
+<ol start="2">
+<li>web-service接口<br>2.1 CHINAstock的web-service：<br><a href="http://www.webxml.com.cn/WebServices/ChinaStockWebService.asmx" target="_blank" rel="noopener">http://www.webxml.com.cn/WebServices/ChinaStockWebService.asmx</a><br>中国股票行情数据 WEB 服务（支持深圳和上海股市的全部基金、债券和股票），数据即时更新。输出GIF分时走势图、日/周/月 K线图、及时行情数据（股票名称、行情时间、最新价、昨收盘、今开盘、涨跌额、最低、最高、涨跌幅、成交量、成交额、竞买价、竞卖价、委比、买一- 买五、卖一 - 卖五）。此WEB服务提供了如下几个接口：<br>2.1.1 getStockImageByCode<br>GET 股票GIF分时走势图<br>INput：theStockCode = 股票代号，如：sh000001<br>POST /WebServices/ChinaStockWebService.asmx HTTP/1.1<br>Host: <a href="http://www.webxml.com.cn" target="_blank" rel="noopener">www.webxml.com.cn</a><br>Content-Type: text/xml; charset=utf-8<br>Content-Length: length<br>SOAPAction: <a href="http://WebXml.com.cn/getStockImageByCode" target="_blank" rel="noopener">http://WebXml.com.cn/getStockImageByCode</a></li>
+</ol>
+<p>string</p>
+<p>Output：<br>2.1.2 getStockImageByteByCode<br>获得中国股票GIF分时走势图字节数组<br>INput：theStockCode = 股票代号，如：sh000001<br>POST /WebServices/ChinaStockWebService.asmx HTTP/1.1Host:<a href="http://www.webxml.com.cnContent-Type" target="_blank" rel="noopener">www.webxml.com.cnContent-Type</a>: text/xml;charset=utf-8Content-Length: lengthSOAPAction:”<a href="http://WebXml.com.cn/getStockImageByteByCode&quot;" target="_blank" rel="noopener">http://WebXml.com.cn/getStockImageByteByCode&quot;</a> string<br>返回的数据如下：<br>R0lGODlhIQIsAfcAAAAAAAwLBxkGBQ4ODhAQEBsSChUVFS4TDB8eGQkA9koPCDAAzy4mFVgAp2UYC0IqEUYuBVwiDEAsI1QnFX8AgDU1NUozFlgxD6cBWVY5FnIwEmQ4Gc0AMlhDHPEADlVJMEpKSm1IHOUBWpY3FZMyVY9IGXRWIEFmWGNYUmpdPXJgHQB8HK9EGGBgX4lXIACoAHhkMyt4m4VkJtstbv8A<br>2.1.3 getStockImage_kByCode<br>直接获得中国股票GIF日/周/月 K 线图（545*300pixel/72dpi）<br>INPUT: theStockCode = 股票代号<br>theType = K 线图类型（D：日[默认]、W：周、M：月），<br>POST /WebServices/ChinaStockWebService.asmx HTTP/1.1Host:<a href="http://www.webxml.com.cnContent-Type" target="_blank" rel="noopener">www.webxml.com.cnContent-Type</a>: text/xml;charset=utf-8Content-Length: lengthSOAPAction:”<a href="http://WebXml.com.cn/getStockImage_kByCode&quot;" target="_blank" rel="noopener">http://WebXml.com.cn/getStockImage_kByCode&quot;</a> string string<br>比如按照下图所示输入：<br>返回的结果就是周K线图：<br>2.1.4 getStockImage_kByteByCode<br>获得中国股票GIF日/周/月 K 线图字节数组<br>Input：theStockCode = 股票代号，如：sh000001<br>POST /WebServices/ChinaStockWebService.asmx HTTP/1.1Host:<a href="http://www.webxml.com.cnContent-Type" target="_blank" rel="noopener">www.webxml.com.cnContent-Type</a>: text/xml;charset=utf-8Content-Length: lengthSOAPAction:”<a href="http://WebXml.com.cn/getStockImage_kByteByCode&quot;" target="_blank" rel="noopener">http://WebXml.com.cn/getStockImage_kByteByCode&quot;</a> string stringHTTP/1.1 200 OKContent-Type: text/xml; charset=utf-8Content-Length:length base64Binary<br>比如按照下图输入：<br>返回的结果就是周K线图字节数组<br>R0lGODlhIQIsAfcAAAAAAAwLBxkGBQ4ODhAQEBsSChUVFS4TDB8eGQkA9koPCDAAzy4mFVgAp2UYC0IqEUYuBVwiDEAsI1QnFX8AgDU1NUozFlgxD6cBWVY5FnIwEmQ4Gc0AMlhDHPEADlVJMEpKSm1IHOUBWpY3FZMyVY9IGXRWIEFmWGNYUmpdPXJgHQB8HK9EGGBgX4lXIACoAHhkMyt4m4VkJtstbv8A<br>2.1.5 getStockInfoByCode<br>获得中国股票及时行情<br>input：theStockCode = 股票代号<br>POST /WebServices/ChinaStockWebService.asmx HTTP/1.1Host:<a href="http://www.webxml.com.cnContent-Type" target="_blank" rel="noopener">www.webxml.com.cnContent-Type</a>: text/xml;charset=utf-8Content-Length: lengthSOAPAction:”<a href="http://WebXml.com.cn/getStockInfoByCode&quot;" target="_blank" rel="noopener">http://WebXml.com.cn/getStockInfoByCode&quot;</a> string<br>返回的值一个一维字符串数组String(24)，结构为：String(0)股票代号、String(1)股票名称、String(2)行情时间、String(3)最新价（元）、String(4)昨收盘（元）、String(5)今开盘（元）、String(6)涨跌额（元）、String(7)最低（元）、String(8)最高（元）、String(9)涨跌幅（%）、String(10)成交量（手）、String(11)成交额（万元）、String(12)竞买价（元）、String(13)竞卖价（元）、String(14)委比（%）、String(15)-String(19)买一- 买五（元）/手、String(20)-String(24)卖一 - 卖五（元）/手。<br>Webservice的方法类似于现在concurrent项目的DBWS数据的获取，都是通过SOAP协议向DBWS服务器获取相关的数据。<br>利用雅虎查中国股票<br><a href="http://quote.yahoo.com/d/quotes.csv?s=MSFT&amp;f=slc1wop" target="_blank" rel="noopener">http://quote.yahoo.com/d/quotes.csv?s=MSFT&amp;f=slc1wop</a><br>返回微软的股票价格<br>“MSFT”,”4:00pm - 30.70”,+1.04,”21.46 -30.75”,29.77,29.66<br><a href="http://quote.yahoo.com/d/quotes.csv?s=000969.SZ&amp;f=slc1wop" target="_blank" rel="noopener">http://quote.yahoo.com/d/quotes.csv?s=000969.SZ&amp;f=slc1wop</a><br>这个返回安泰科技的，一般有半个小时的延迟。<br>但是s=000969.sz 这个后面的sz是深圳的意思, 沪市是SS后缀</p>
+<p>另附：</p>
+<p>sinajs 接口中获取各大股指的详细代码 深成指：<br>上证指：<br>道琼斯：<br>纳斯达克：<br>恒生指：<br>日经指数：<br>台湾加权：<br>新加坡：</p>
+<p>详细用法参考sinajs使用方法！</p>
+<p>参考方法：</p>
+<p>新浪期货数据接口</p>
+<p> 实时数据<br>【例子】<br><a href="http://hq.sinajs.cn/list=M0" target="_blank" rel="noopener">http://hq.sinajs.cn/list=M0</a><br>豆粕连续 M0</p>
+<p>返回值如下：<br>varhq_str_M0=”豆粕连续,145958,3170,3190,3145,3178,3153,3154,3154,3162,3169,1325,223,1371608,1611074,连,豆粕,2013-06-28”;</p>
+<hr>
+<p>查看 <a href="http://finance.sina.com.cn/futures/quotes/M0.shtml页面，发现含义如下：" target="_blank" rel="noopener">http://finance.sina.com.cn/futures/quotes/M0.shtml页面，发现含义如下：</a></p>
+<p>最新价:  3154 开盘价: 3170 最高价: 3190   最低价: 3145<br>结算价:  3162 昨结算: 3169 持仓量: 1371608 成交量: 1611074<br>买  价: 3153 卖  价: 3154 买  量: 1325  卖  量:  223</p>
+<hr>
+<p>这个字符串由许多数据拼接在一起，不同含义的数据用逗号隔开了，按照程序员的思路，顺序号从0开始。<br>0：豆粕连续，名字<br>1：145958，不明数字（难道是数据提供商代码？）<br>2：3170，开盘价<br>3：3190，最高价<br>4：3145，最低价<br>5：3178，昨日收盘价 （2013年6月27日）<br>6：3153，买价，即“买一”报价<br>7：3154，卖价，即“卖一”报价<br>8：3154，最新价，即收盘价<br>9：3162，结算价<br>10：3169，昨结算<br>11：1325，买  量<br>12：223，卖  量<br>13：1371608，持仓量<br>14：1611074，成交量<br>15：连，大连商品交易所简称<br>16：豆粕，品种名简称<br>17：2013-06-28，日期</p>
+<hr>
+<p>新浪期货数据各品种代码（商品连续）如下</p>
+<p> RB0 螺纹钢<br> AG0 白银<br> AU0 黄金<br> CU0 沪铜<br> AL0 沪铝<br> ZN0 沪锌<br> PB0 沪铅<br> RU0 橡胶<br> FU0 燃油<br> WR0 线材<br> A0 大豆<br> M0 豆粕<br> Y0 豆油<br> J0 焦炭<br> C0 玉米<br> L0 乙烯<br> P0 棕油<br> V0 PVC<br> RS0 菜籽<br> RM0 菜粕<br> FG0 玻璃<br> CF0 棉花<br> WS0 强麦<br> ER0 籼稻<br> ME0 甲醇<br> RO0 菜油<br> TA0 甲酸</p>
+<p> CFF_RE_IF1307  股指期货好像没有期指连续</p>
+<p>品种名 + 0 （数字0），代表品种连续，如果是其他月份，请使用品种名 + YYYMM</p>
+<p>例如豆粕 2013年09月，M1309</p>
+<p><a href="http://hq.sinajs.cn/list=M1309" target="_blank" rel="noopener">http://hq.sinajs.cn/list=M1309</a></p>
+<p>一次可以请求多个品种，例如</p>
+<p><a href="http://hq.sinajs.cn/list=CFF_RE_IF1307,TA0,M0,CFF_RE_IF1306,RB1309,M1309,SR1309,TA1309,Y1309,P1309,C1309,FG1309,WS1309,A1309,L1309,CF1309,CU1303" target="_blank" rel="noopener">http://hq.sinajs.cn/list=CFF_RE_IF1307,TA0,M0,CFF_RE_IF1306,RB1309,M1309,SR1309,TA1309,Y1309,P1309,C1309,FG1309,WS1309,A1309,L1309,CF1309,CU1303</a></p>
+<p>返回值</p>
+<p>var<br>hq_str_CFF_RE_IF1307=”2116,2217.8,2098,2168.6,1253068,808746000000,59806,2168.6,2144.6,2331.4,1907.8,,,2119,2119.6,70151,0,0,–,–,–,–,–,–,–,–,0,0,–,–,–,–,–,–,–,–,2013-06-28,15:33:30,0”;<br>var</p>
+<p>hq_str_TA0=”甲酸连<br>续,145956,7842,7848,7774,7844,7826,7828,7826,7814,7836,19,22,472758,205716,<br>郑,甲酸,2013-06-28”;<br>var<br>hq_str_M0=”豆粕连<br>续,145958,3170,3190,3145,3178,3153,3154,3154,3162,3169,1325,223,1371608,1611074,<br>连,豆粕,2013-06-28”;<br>var<br>hq_str_CFF_RE_IF1306=”2312.8,2322.6,2277.6,2315.6,57266,39596400000,0,2315.6,2315,2797.4,1865,,,2329.8,2331.2,13893,0,0,–,–,–,–,–,–,–,–,0,0,–,–,–,–,–,–,–,–,2013-06-21,15:38:30,0”;<br>var</p>
+<p>hq_str_RB1309=”螺钢<br>1309,145957,3422,3468,3422,3440,3449,3452,3449,3447,3429,10,2,3750,3510,<br>沪,螺钢,2013-06-28”;<br>var<br>hq_str_M1309=”豆粕<br>1309,145958,3495,3512,3455,3488,3460,3461,3460,3478,3500,330,228,784354,519734,<br>连,豆粕,2013-06-28”;<br>var<br>hq_str_SR1309=”白糖<br>1309,145956,5172,5194,5165,5189,5192,5193,5192,5179,5184,5,198,334854,65036,<br>郑,白糖,2013-06-28”;<br>var<br>hq_str_TA1309=”甲酸<br>1309,145956,7842,7848,7774,7844,7826,7828,7826,7814,7836,19,22,472758,205716,<br>郑,甲酸,2013-06-28”;<br>var<br>hq_str_Y1309=”豆油<br>1309,145958,7120,7190,7112,7150,7150,7156,7152,7164,7140,55,42,318796,97838,<br>连,豆油,2013-06-28”;<br>var<br>hq_str_P1309=”棕油<br>1309,145956,5760,5828,5760,5786,5782,5784,5784,5798,5780,21,3,235638,67818,<br>连,棕油,2013-06-28”;<br>var<br>hq_str_C1309=”玉米<br>1309,145957,2417,2425,2415,2418,2418,2419,2418,2419,2413,43,95,427232,57906,<br>连,玉米,2013-06-28”;<br>var<br>hq_str_FG1309=”玻璃<br>1309,145956,1371,1378,1365,1372,1371,1372,1371,1372,1369,2,336,203932,184978,<br>郑,玻璃,2013-06-28”;<br>var<br>hq_str_WS1309=”强麦<br>1309,145955,2557,2558,2536,2552,2537,2538,2537,2543,2556,6,31,37406,14254,<br>郑,强麦,2013-05-14”;<br>var<br>hq_str_A1309=”豆一<br>1309,145946,4789,4792,4784,4791,4789,4790,4789,4789,4789,4,26,64086,5938,<br>连,豆一,2013-06-28”;<br>var<br>hq_str_L1309=”乙烯<br>1309,145958,10440,10485,10390,10440,10400,10405,10405,10440,10400,321,8,241618,188036,<br>连,乙烯,2013-06-28”;<br>var<br>hq_str_CF1309=”棉花<br>1309,145954,20435,20470,20390,20445,20390,20415,20390,20440,20425,76,5,27778,2188,<br>郑,棉花,2013-06-28”;<br>var hq_str_CU1303=””;</p>
+<p>历史数据</p>
+<p>新浪期货数据各品种代码（商品连续）如下<br> RB0 螺纹钢</p>
+<p> AG0 白银</p>
+<p> AU0 黄金</p>
+<p> CU0 沪铜</p>
+<p> AL0 沪铝</p>
+<p> ZN0 沪锌</p>
+<p> PB0 沪铅</p>
+<p> RU0 橡胶</p>
+<p> FU0 燃油</p>
+<p> WR0 线材</p>
+<p> A0 大豆</p>
+<p> M0 豆粕</p>
+<p> Y0 豆油</p>
+<p> J0 焦炭</p>
+<p> C0 玉米</p>
+<p> L0 乙烯</p>
+<p> P0 棕油</p>
+<p> V0 PVC</p>
+<p> RS0 菜籽</p>
+<p> RM0 菜粕</p>
+<p> FG0 玻璃</p>
+<p> CF0 棉花</p>
+<p> WS0 强麦</p>
+<p> ER0 籼稻</p>
+<p> ME0 甲醇</p>
+<p> RO0 菜油</p>
+<p> TA0 甲酸</p>
+<p>商品期货<br><a href="http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesMiniKLineXm?symbol=CODE" target="_blank" rel="noopener">http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesMiniKLineXm?symbol=CODE</a><br>例子：<br><a href="http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesMiniKLine5m?symbol=M0" target="_blank" rel="noopener">http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesMiniKLine5m?symbol=M0</a><br>5分钟<a href="http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesMiniKLine5m?symbol=M0" target="_blank" rel="noopener">http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesMiniKLine5m?symbol=M0</a><br>15分钟</p>
+<p><a href="http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesMiniKLine15m?symbol=M0" target="_blank" rel="noopener">http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesMiniKLine15m?symbol=M0</a></p>
+<p>30分钟</p>
+<p><a href="http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesMiniKLine30m?symbol=M0" target="_blank" rel="noopener">http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesMiniKLine30m?symbol=M0</a></p>
+<p>60分钟</p>
+<p><a href="http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesMiniKLine60m?symbol=M0" target="_blank" rel="noopener">http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesMiniKLine60m?symbol=M0</a></p>
+<p>日K线</p>
+<p><a href="http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesDailyKLine?symbol=M0" target="_blank" rel="noopener">http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesDailyKLine?symbol=M0</a></p>
+<p><a href="http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesDailyKLine?symbol=M1401" target="_blank" rel="noopener">http://stock2.finance.sina.com.cn/futures/api/json.php/IndexService.getInnerFuturesDailyKLine?symbol=M1401</a></p>
+<p>股指期货<br>5分钟</p>
+<p><a href="http://stock2.finance.sina.com.cn/futures/api/json.php/CffexFuturesService.getCffexFuturesMiniKLine5m?symbol=IF1306" target="_blank" rel="noopener">http://stock2.finance.sina.com.cn/futures/api/json.php/CffexFuturesService.getCffexFuturesMiniKLine5m?symbol=IF1306</a></p>
+<p>15<br><a href="http://stock2.finance.sina.com.cn/futures/api/json.php/CffexFuturesService.getCffexFuturesMiniKLine15m?symbol=IF1306" target="_blank" rel="noopener">http://stock2.finance.sina.com.cn/futures/api/json.php/CffexFuturesService.getCffexFuturesMiniKLine15m?symbol=IF1306</a></p>
+<p>30分钟</p>
+<p><a href="http://stock2.finance.sina.com.cn/futures/api/json.php/CffexFuturesService.getCffexFuturesMiniKLine30m?symbol=IF1306" target="_blank" rel="noopener">http://stock2.finance.sina.com.cn/futures/api/json.php/CffexFuturesService.getCffexFuturesMiniKLine30m?symbol=IF1306</a></p>
+<p>60分钟</p>
+<p><a href="http://stock2.finance.sina.com.cn/futures/api/json.php/CffexFuturesService.getCffexFuturesMiniKLine60m?symbol=IF1306" target="_blank" rel="noopener">http://stock2.finance.sina.com.cn/futures/api/json.php/CffexFuturesService.getCffexFuturesMiniKLine60m?symbol=IF1306</a></p>
+<p>日线</p>
+<p><a href="http://stock2.finance.sina.com.cn/futures/api/json.php/CffexFuturesService.getCffexFuturesDailyKLine?symbol=IF1306" target="_blank" rel="noopener">http://stock2.finance.sina.com.cn/futures/api/json.php/CffexFuturesService.getCffexFuturesDailyKLine?symbol=IF1306</a></p>
+<p>转自：<a href="https://blog.csdn.net/focusjava/article/details/50394021" target="_blank" rel="noopener">https://blog.csdn.net/focusjava/article/details/50394021</a> </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/黄金，股票/" rel="tag"># 黄金，股票</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/23/php红包接口思路和步骤/" rel="next" title="php红包接口思路和步骤">
+                <i class="fa fa-chevron-left"></i> php红包接口思路和步骤
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/23/GitHub-Laravel-扩展包-TOP-250/" rel="prev" title="GitHub Laravel 扩展包 TOP 250">
+                GitHub Laravel 扩展包 TOP 250 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDg1MC8xNzM3NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/god.jpg" alt="习红卫">
+            
+              <p class="site-author-name" itemprop="name">习红卫</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/1014573565" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xihongwei2018@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">习红卫</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("YnyQVBXBa2f0qOsGIJTx3JUE-gzGzoHsz", "OLFC1JutSoVp3xOeQ4Vmxy1w");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
