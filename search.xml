@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Shell]]></title>
+    <url>%2F2019%2F05%2F16%2Fshell%2F</url>
+    <content type="text"><![CDATA[Shell基础1#!/bin/bash 代表指定某个解析器 运行某个shell脚本1. test.sh 接收外部参数12$1 $2 单个接收$@ $* 全部接收，用双引号包含区分，$@每个参数为1份，$*所有参数为一份 获取字符串长度1$&#123;#string_name&#125; 从指定位置开始截取12345678910格式 说明$&#123;string: start :length&#125; 从 string 字符串的左边第 start 个字符开始，向右截取 length 个字符。$&#123;string: start&#125; 从 string 字符串的左边第 start 个字符开始截取，直到最后。$&#123;string: 0-start :length&#125; 从 string 字符串的右边第 start 个字符开始，向右截取 length 个字符。$&#123;string: 0-start&#125; 从 string 字符串的右边第 start 个字符开始截取，直到最后。$&#123;string#*chars&#125; 从 string 字符串第一次出现 *chars 的位置开始，截取 *chars 右边的所有字符。$&#123;string##*chars&#125; 从 string 字符串最后一次出现 *chars 的位置开始，截取 *chars 右边的所有字符。$&#123;string%*chars&#125; 从 string 字符串第一次出现 *chars 的位置开始，截取 *chars 左边的所有字符。$&#123;string%%*chars&#125; 从 string 字符串最后一次出现 *chars 的位置开始，截取 *chars 左边的所有字符。 实例]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[mysql主从复制和主主复制]]></title>
+    <url>%2F2019%2F05%2F16%2Fmysql%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E5%92%8C%E4%B8%BB%E4%B8%BB%E5%A4%8D%E5%88%B6%2F</url>
+    <content type="text"><![CDATA[MySQL5.7服务群集（实现主从复制、读写分离功能） 当业务量非常大时，一台服务器的性能无法满足需求，就可以通过配置主从复制实现读写分离来分摊负载，避免因负载太高而造成无法及时响应请求。 准备工作首先准备两台虚拟机： A 192.168.0.136B 192.168.0.150 并安装好Mysql 配置修改配置文件A 192.168.0.136 1vim /etc/mysql/mysql.conf.d/mysqld.cnf 修改以下配置：123456789101112server-id = 1 #两台服务器不能使用同一个ID log_bin = /var/log/mysql/mysql-bin.logexpire_logs_days = 10max_binlog_size = 100Mauto_increment-increment=2 #自增步长，一般是服务器数量和auto_increment-offset=1 #起始自增数，不要重复#如果是主从，只要主有下面两个replicate_do_db = xtable #复制的库,需要复制的库，多个需要重复此行binlog_do_db = xtable binlog_ignore_db = mysql #不复制的库binlog_ignore_db = information_schema B 192.168.0.150 1vim /etc/mysql/mysql.conf.d/mysqld.cnf 修改以下配置：123456789101112server-id = 2 #两台服务器不能使用同一个ID log_bin = /var/log/mysql/mysql-bin.logexpire_logs_days = 10max_binlog_size = 100Mauto_increment-increment=2auto_increment-offset=2#如果是主从，只要主有下面两个replicate_do_db = xtable #复制的库,需要复制的库，多个需要重复此行binlog_do_db = xtable binlog_ignore_db = mysql #不复制的库binlog_ignore_db = information_schema 保存之后可以将Mysql重启123service mysql restart//查看状态systemctl status mysql.service 连接主从服务器进入主服务器A 192.168.0.1361mysql -uroot -proot master的数据库中建立备份账号：x36为用户名，%表示任何远程地址(可替换成对应的IP)，如下表示密码为123456的任何远程地址的x36都可以连接master主机123grant replication slave on *.* to 'x36'@'%' identified by '123456';#刷新权限FLUSH PRIVILEGES; 查看A MySQL服务器二进制文件名与位置1SHOW MASTER STATUS; 进入从服务器B 192.168.0.1501mysql -uroot -proot 告知主服务的二进制文件名与位置12345stop slave;CHANGE MASTER TO MASTER_HOST='192.168.0.136',MASTER_USER='x36',MASTER_PASSWORD='123456',MASTER_LOG_FILE='mysql-bin.000003',MASTER_LOG_POS=6913;start slave; MASTER_LOG_FILE, MASTER_LOG_POS 对应上面SHOW MASTER STATUS; File,Position 查看slave从机的状态1show slave status \G 显示这两个为Yes，代表成功了Slave_IO_Running: YesSlave_SQL_Running: Yes 接下就在主服务器上生成数据，查看从服务器是否有数据。配置主主就是从服务器和主服务器的配置拿过来]]></content>
+      <categories>
+        <category>Mysql</category>
+      </categories>
+      <tags>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[web负载均衡]]></title>
+    <url>%2F2019%2F05%2F15%2FNginx%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%2F</url>
+    <content type="text"><![CDATA[Web负载均衡：增加机器来实现分发请求 1、HTTP负载均衡利用代码进行随机重定向 12345678910&lt;?php$domain = array( 'a.com', 'b.com', 'c.com',);$domain = array_rand($domain);header('Location: http://'. $domain); 这个重定向非常容易实现，并且可以自定义各种策略。但是，它在大规模访问量下，性能不佳。而且，给用户的体验也不好，实际请求发生重定向，增加了网络延时。 2、反向代理负载均衡反向代理服务的核心工作主要是转发HTTP请求，扮演了浏览器端和后台Web服务器中转的角色。因为它工作在HTTP层（应用层），也就是网络七层结构中的第七层，因此也被称为“七层负载均衡”。可以做反向代理的软件很多，比较常见的一种是Nginx。 准备两台Nginx服务器：A: 192.168.0.150B: 192.168.0.136 打开A的配置，在http里面加上12345678910upstream nodes &#123; server 192.168.0.136; server 192.168.0.150:8080;&#125;//在server里面修改server_name nodes;location / &#123; proxy_pass http://nodes; try_files $uri $uri/ =404;&#125; 另外配置一个8080端口为应用入口，80做外网端口完了重启就可以了 还有几种策略可以自己选择：1、权重配置：weight=5 ，数字越大请求数量越多2、ip_hash配置：ip_hash; 每一个请求固定落在一个上游服务器，可解决session共享问题，将session这类的信息，专门用某个独立服务来存储，例如redis/memchache，这个方案是比较推荐的。3、fair配置：fair;按上游服务器的响应时间来分配请求。响应时间短的优先分配4、url_hash配置：按照访问的url的hash结果来分配请求，使每一个url定向到同一个上游服务器 反向代理服务，也是可以开启缓存的，如果开启了，会增加反向代理的负担，需要谨慎使用。这种负载均衡策略实现和部署非常简单，而且性能表现也比较好。但是，它有“单点故障”的问题，如果挂了，会带来很多的麻烦。而且，到了后期Web服务器继续增加，它本身可能成为系统的瓶颈。 3、IP负载均衡IP负载均衡服务是工作在网络层（修改IP）和传输层（修改端口，第四层），比起工作在应用层（第七层）性能要高出非常多。原理是，他是对IP层的数据包的IP地址和端口信息进行修改，达到负载均衡的目的。这种方式，也被称为“四层负载均衡”。常见的负载均衡方式，是LVS（Linux Virtual Server，Linux虚拟服务），通过IPVS（IP Virtual Server，IP虚拟服务）来实现。 4、DNS负载均衡DNS（Domain Name System）负责域名解析的服务，域名url实际上是服务器的别名，实际映射是一个IP地址，解析过程，就是DNS完成域名到IP的映射。而一个域名是可以配置成对应多个IP的。因此，DNS也就可以作为负载均衡服务。 这种负载均衡策略，配置简单，性能极佳。但是，不能自由定义规则，而且，变更被映射的IP或者机器故障时很麻烦，还存在DNS生效延迟的问题。 DNS/GSLB负载均衡 我们常用的CDN（Content Delivery Network，内容分发网络）实现方式，其实就是在同一个域名映射为多IP的基础上更进一步，通过GSLB（Global Server Load Balance，全局负载均衡）按照指定规则映射域名的IP。一般情况下都是按照地理位置，将离用户近的IP返回给用户，减少网络传输中的路由节点之间的跳跃消耗。]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>负载均衡</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[分布式架构知识体系必读]]></title>
     <url>%2F2019%2F03%2F25%2F%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E5%BF%85%E8%AF%BB%2F</url>
     <content type="text"><![CDATA[参考地址：https://mp.weixin.qq.com/s/ybkenT9uU8SR5roAK9M_0w]]></content>
