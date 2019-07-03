@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Yar RPC]]></title>
+    <url>%2F2019%2F07%2F03%2FYar-RPC%2F</url>
+    <content type="text"><![CDATA[介绍Yar – 并行的RPC框架(Concurrent RPC framework)，Yar是一个非常轻量级的RPC框架，鸟哥出品 RPC (Remote Procedure Call)，远程过程调用。是一种进程间通信技术，允许程序像调用本地方法一样调用远程服务。 RPC屏蔽了数据打包、网络通信的细节，使得使用者只需要关注于服务调用，而服务调用又像调用本地方法一样自然。 安装yar扩展使用源码包编译安装12345git clone https://github.com/laruence/yar.gitcd yarphpize ./configure --with-php-config=/usr/bin/php-configmake &amp;&amp; make install 修改配置文件1extension=yar.so 重启php1sudo /etc/init.d/php7.2-fpm restart 简单使用服务端创建文件 yar_server.php1234567891011121314151617&lt;?phpclass API &#123; /** * the doc info will be generated automatically into service info page. * @params * @return */ public function api1($parameter, $option = "foo") &#123; return $parameter; &#125; protected function client_can_not_see() &#123; &#125;&#125; $service = new Yar_Server(new API());$service-&gt;handle(); 可以使用GET方式访问该文件，可查看文档 客户端创建文件 yar_client.php,对于Client端来说, 简单的串行调用1234&lt;?php$client = new Yar_Client("http://host/yar_server.php");$result = $client-&gt;api1("parameter");var_dump($result); 另外还可以进行并行化调用 12345678910&lt;?php$server_url = "http://host/yar_server.php";function callback($retval, $callinfo) &#123; var_dump(date('Y-m-d H:i:s').'--'.$retval);&#125;Yar_Concurrent_Client::call($server_url, "api1", array("parameters"), "callback");Yar_Concurrent_Client::call($server_url, "api2", array("parameters"), "callback");Yar_Concurrent_Client::call($server_url, "api3", array("parameters"), "callback");Yar_Concurrent_Client::loop(); //send 详情可见 鸟哥博客]]></content>
+      <categories>
+        <category>RPC</category>
+      </categories>
+      <tags>
+        <tag>RPC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Docker笔记]]></title>
+    <url>%2F2019%2F07%2F02%2FDocker%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[Docker介绍Docker 属于 Linux 容器的一种封装，提供简单易用的容器使用接口。它是目前最流行的 Linux 容器解决方案。 Docker 将应用程序与该程序的依赖，打包在一个文件里面。运行这个文件，就会生成一个虚拟容器。程序在这个虚拟容器里运行，就好像在真实的物理机上运行一样。有了 Docker，就不用担心环境问题。 总体来说，Docker 的接口相当简单，用户可以方便地创建和使用容器，把自己的应用放入容器。容器还可以进行版本管理、复制、分享、修改，就像管理普通的代码一样。 Docker 的用途Docker 的主要用途，目前有三大类。 （1）提供一次性的环境。比如，本地测试他人的软件、持续集成的时候提供单元测试和构建的环境。 （2）提供弹性的云服务。因为 Docker 容器可以随开随关，很适合动态扩容和缩容。 （3）组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。 Docker 的安装Docker 的安装请参考官方文档。 https://docs.docker.com/install/linux/docker-ce/ubuntu/ 安装完成后，运行下面的命令，验证是否安装成功。 1docker version 笔记在Ubuntu上跑一个静态页面运行一个ubuntu容器，并且打开bash，命名为web1docker run -p 80 -t -i --name=web ubuntu /bin/bash 进入到容器，安装nginx并且配置和启动nginx12345apt install nginx//启动nginx//退出容器Ctrl + Q + P 查看容器状态1docker ps -a 访问1curl http://127.0.0.1:port port 可用 docker port web 命令查看 暂停容器1docker stop web 启动容器1docker stop web 开启容器里面的服务1docker exec -it web "nginx" pull 和 push待续 docker build Dockerfile待续]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Redis理论复习]]></title>
     <url>%2F2019%2F05%2F16%2FRedis%E7%90%86%E8%AE%BA%E5%A4%8D%E4%B9%A0%2F</url>
     <content type="text"><![CDATA[1、redis 和 memcached 什么区别 redis支持多中数据类型(String, List, Sorted Set, Set, Hash)，memcached 只支持String redis单进程，memcached多线程 redis可持久化(AOP, RDB) redis值512M，memcached值1M 2、Redis 有哪几种数据淘汰策略？ noeviction:返回错误当内存限制达到，并且客户端尝试执行会让更多内存被使用的命令。 allkeys-lru: 尝试回收最少使用的键（LRU），使得新添加的数据有空间存放。 volatile-lru: 尝试回收最少使用的键（LRU），但仅限于在过期集合的键,使得新添加的数据有空间存放。 allkeys-random: 回收随机的键使得新添加的数据有空间存放。 volatile-random: 回收随机的键使得新添加的数据有空间存放，但仅限于在过期集合的键。 volatile-ttl: 回收在过期集合的键，并且优先回收存活时间（TTL）较短的键,使得新添加的数据有空间存放。 3、Redis 集群方案应该怎么做？都有哪些方案？ codis，目前用的最多的集群方案，基本和 twemproxy 一致的效果，但它支持在节点数量改变情况下，旧节点数据可恢复到新 hash 节点。 redis cluster3.0 自带的集群，特点在于他的分布式算法不是一致性 hash，而是 hash 槽的概念，以及自身支持节点设置从节点。 4、MySQL 里有 2000w 数据，redis 中只存 20w 的数据，如何保证 redis 中的数据都是热点数据？redis 内存数据集大小上升到一定大小的时候，就会施行数据淘汰策略 5、Redis 有哪些适合的场景？ 会话缓存（Session Cache） 全页缓存（FPC） 队列 排行榜/计数器 发布/订阅 6、Redis 哈希槽的概念？Redis 集群没有使用一致性 hash,而是引入了哈希槽的概念，Redis 集群有 16384 个哈希槽，每个 key 通过 CRC16 校验后对 16384 取模来决定放置哪个槽，集群的每个节点负责一部分 hash 槽。 7、Redis 集群的主从复制模型是怎样的？为了使在部分节点失败或者大部分节点无法通信的情况下集群仍然可用，所以集群使用了主从复制模型,每个节点都会有 N-1 个复制品. 8、Redis 集群会有写操作丢失吗？为什么？Redis 并不能保证数据的强一致性，这意味这在实际中集群在特定的条件下可能会丢失写操作。可使用事务 9、Redis 集群之间是如何复制的？Redis 集群最大节点个数是多少？Redis 集群如何选择数据库？异步复制， 16384 个，Redis 集群目前无法做数据库选择，默认在 0 数据库。 10、怎么理解 Redis 事务？事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行，事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。事务是一个原子操作：事务中的命令要么全部被执行，要么全部都不执行。 MULTI、EXEC、DISCARD、WATCH 11、Redis 如何做内存优化？尽可能使用散列表（hashes），散列表（是说散列表里面存储的数少）使用的内存非常小，所以你应该尽可能的将你的数据模型抽象到一个散列表里面。 比如你的 web 系统中有一个用户对象，不要为这个用户的名称，姓氏，邮箱，密码设置单独的 key,而是应该把这个用户的所有信息存储到一张散列表里面。 12、Redis 回收进程如何工作的？一个新的命令被执行 或 添加了新的数据的时候检查内存是否满了，会根据淘汰策略进行回收 13、什么是缓存穿透？如何避免？什么是缓存雪崩？何如避免？缓存穿透：一般的缓存系统，都是按照 key 去缓存查询，如果不存在对应的 value，就应该去后端系统查找（比如DB）。一些恶意的请求会故意查询不存在的 key,请求量很大，就会对后端系统造成很大的压力。这就叫做缓存穿透。 避免：在请求部分做好过滤，对查询结果为空的情况也进行缓存，缓存时间设置短一点 缓存雪崩：当缓存服务器重启或者大量缓存集中在某一个时间段失效，这样在失效的时候，会给后端系统带来很大压力。导致系统崩溃。 避免：1：在缓存失效后，通过加锁或者队列来控制读数据库写缓存的线程数量。比如对某个 key 只允许一个线程查询数据和写缓存，其他线程等待。2：做二级缓存，A1 为原始缓存，A2 为拷贝缓存，A1 失效时，可以访问 A2，A1 缓存失效时间设置为短期，A2 设置为长期3：不同的 key，设置不同的过期时间，让缓存失效的时间点尽量均匀 14、Redis 如何实现延时队列在某个时间将它插入Zset集合中，它变会按照时间戳大小进行排序，也就是对执行时间前后进行排序，这样的话，起一个死循环线程不断地进行取第一个key值，如果当前时间戳大于等于该key值的socre就将它取出来进行消费删除，就可以达到延时执行的目的。 Sentinel 哨兵 是Redis 的高可用性解决方案：由一个或多个Sentinel 实例 组成的Sentinel 系统可以监视任意多个主服务器，以及这些主服务器属下的所有从服务器，并在被监视的主服务器进入下线状态时，自动将下线主服务器属下的某个从服务器升级为新的主服务器。 Redis 主从分离]]></content>
